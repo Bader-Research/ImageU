@@ -1,0 +1,19 @@
+# Use gmake!
+TIC_REGISTRY:=
+TARGET := connComp.cm5.2
+CASTLE := /fs/cm5
+
+# MPL := CMAM | CMMD | SP1 | SP2
+MPL := CMMD
+
+# MACHINE := CM5 | SP1 | SP2
+MACHINE := CM5
+
+CFLAGS := -O4 -D${MACHINE} 
+
+# CFLAGS := -O4 -D${MACHINE} -DX11 
+# LIBS   := -lX11
+
+include ${CASTLE}/include/split-c/Make.split-c
+
+

@@ -1,0 +1,21 @@
+#!/usr/imports/bin/tcsh
+
+set p   = 16
+
+set mach = "SP2"
+set dir  = "/fs/nene/dbader/imageU-3.1"
+setenv JID  `spq | grep $user | grep Running | tail -1|awk '{print $1}'`
+cd $dir
+  setenv MP_PROCS $p
+  setenv MP_EUILIB us
+  setenv MP_HOSTFILE /fs/nene/dbader/SPnodes.$JID
+  poe $dir/connComp -U 12 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 12 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 12 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 16 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 16 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 16 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 19 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 19 -o $mach-ucsb.$p.out
+  poe $dir/connComp -U 19 -o $mach-ucsb.$p.out
+rm -f ~/SPnodes.$JID

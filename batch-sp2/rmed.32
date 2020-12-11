@@ -1,0 +1,11 @@
+#!/bin/csh
+
+set p    = 32
+set mach = "CM5"
+
+connComp -U -o $mach-med.$p.out
+connComp -U -o $mach-med.$p.out
+connComp -U -o $mach-med.$p.out
+connComp -U -o $mach-med.$p.out
+
+

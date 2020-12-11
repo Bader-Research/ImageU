@@ -1,0 +1,4 @@
+#!/bin/csh
+
+connComp -U -o CM5-nas.32.out
+

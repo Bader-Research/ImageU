@@ -1,0 +1,7 @@
+set dir  = "/fs/nene/dbader/imageU-3.1"
+cd $dir
+pbspoe $dir/connComp -U
+pbspoe $dir/connComp -U
+pbspoe $dir/connComp -U
+pbspoe $dir/connComp -U
+pbspoe $dir/connComp -U

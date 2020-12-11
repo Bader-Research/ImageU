@@ -1,0 +1,13 @@
+#!/bin/csh
+
+set p    = 32
+set mach = "CM5"
+
+connComp -U 999 -o $mach-hrel.$p.out
+connComp -U 999 -o $mach-hrel.$p.out
+connComp -U 999 -o $mach-hrel.$p.out
+connComp -U 999 -o $mach-hrel.$p.out
+connComp -U 999 -o $mach-hrel.$p.out
+
+
+

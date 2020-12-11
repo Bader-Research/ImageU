@@ -1,0 +1,16 @@
+#!/usr/imports/bin/tcsh
+
+set p   = 4
+
+set mach = "SP2"
+set dir  = "/fs/nene/dbader/imageU-3.1"
+cd $dir
+  setenv MP_PROCS $p
+  setenv MP_EUILIB us
+  setenv MP_HOSTFILE /fs/nene/dbader/h1
+  poe $dir/connComp -U 9999 -o $mach-lperm.$p.out
+  poe $dir/connComp -U 9999 -o $mach-lperm.$p.out
+  poe $dir/connComp -U 9999 -o $mach-lperm.$p.out
+  poe $dir/connComp -U 9999 -o $mach-lperm.$p.out
+  poe $dir/connComp -U 9999 -o $mach-lperm.$p.out
+

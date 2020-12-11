@@ -1,0 +1,22 @@
+# Use gmake!
+TIC_REGISTRY:=
+TARGET := connComp.sp2
+# CASTLE := /usr/imports/sc/SCsp2
+CASTLE := /fs/nene/dbader/SCsp2
+
+# MPL := CMAM | CMMD | SP1 | SP2
+MPL := SP2
+
+# MACHINE := CM5 | SP1 | SP2
+MACHINE := SP2
+
+CFLAGS := -O4 -D${MACHINE} 
+LIBS   := -L/fs/nene/dbader/SCsp2/lib
+
+# CFLAGS := -O4 -D${MACHINE} -DX11
+# LIBS   := -L/fs/nene/dbader/SCsp2/lib -lX11
+
+include ${CASTLE}/include/split-c/Make.split-c
+
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.

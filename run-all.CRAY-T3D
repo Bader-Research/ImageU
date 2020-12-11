@@ -1,0 +1,15 @@
+#QSUB -l mpp_p=16
+#QSUB -l mpp_t=20:00
+#QSUB -l p_mpp_t=20:00
+#QSUB -lT 20:00
+#QSUB -lt 20:00
+set p    = 16
+set mach = "CRAYT3D"
+set dir  = "/u5/dbader/imageU-2.3"
+cd $dir
+mkdir output
+connComp -npes $p -n  512 -k 256 -f $dir/im/IUbench.im -o $dir/output/IUbench.$p.$mach.out -G -V
+connComp -npes $p -n  128 -k 256 -f $dir/im/copty.im3.128 -o $dir/output/copty.im3.$p.$mach.out -s -V
+connComp -npes $p -n  256 -k   2 -f $dir/im/copty.im6.256 -o $dir/output/copty.im6.$p.$mach.out -s -V
+connComp -npes $p -n  512 -k 256 -f $dir/im/band5.512 -o $dir/output/band5.$p.$mach.out -s -V
+connComp -npes $p -n 1024 -k 256 -f $dir/im/b5.1024 -o $dir/output/b5.$p.$mach.out -s -V

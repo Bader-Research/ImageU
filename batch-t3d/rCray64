@@ -1,0 +1,19 @@
+#QSUB -l mpp_p=64
+#QSUB -l mpp_t=20:00
+#QSUB -l p_mpp_t=20:00
+#QSUB -lT 20:00
+#QSUB -lt 20:00
+set p    = 64
+set mach = "CRAYT3D"
+set dir  = "/u5/dbader/work"
+cd $dir
+set k = 11
+while ($k < 19)
+@ k = ( $k + 1 )
+
+connComp -npes $p -U $k 
+connComp -npes $p -U $k 
+connComp -npes $p -U $k 
+
+end
+

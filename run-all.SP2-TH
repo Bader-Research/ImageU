@@ -1,0 +1,61 @@
+#!/bin/csh
+
+set p    = $1
+set mach = "SP2-TH"
+
+sprun5 $p 30 connComp -n  512 -k 256 -f im/IUbench.im -o output/IUbench.$p.$mach.out -G -V
+sprun5 $p 30 connComp -n  128 -k 256 -f im/copty.im3.128 -o output/copty.im3.$p.$mach.out -s -V
+sprun5 $p 30 connComp -n  256 -k   2 -f im/copty.im6.256 -o output/copty.im6.$p.$mach.out -s -V
+sprun5 $p 30 connComp -n  512 -k 256 -f im/band5.512 -o output/band5.$p.$mach.out -s -V
+sprun5 $p 30 connComp -n 1024 -k 256 -f im/b5.1024 -o output/b5.$p.$mach.out -s -V
+
+#----------------sprun5---------------------------------------
+
+#!/usr/imports/bin/tcsh
+
+# Use sprun nprocs time problem 
+#             $1    $2     '$3*'
+#
+# this script submits a jobs using us
+
+# this handles the spsubmit (2 min, 4 nodes, interactive, mpl, us, commit)
+
+set param1 = $1
+set param2 = $2
+shift; shift
+set restparam = "$*"
+
+spsubmit << EOF
+$param2
+$param1
+i
+m
+n
+c
+EOF
+
+echo Waiting to run: $restparam
+
+# this is an ugly way to check when the nodes have been allocated
+
+setenv JID  `spq | grep $user | tail -1|awk '{print $1}'`
+test -f /fs/nene/$user/SPnodes.$JID
+setenv STATUS $status
+while ($STATUS != 0)
+  sleep 10
+  test -f /fs/nene/$user/SPnodes.$JID
+  setenv STATUS $status
+end
+
+# run the job
+setenv MP_PROCS $param1
+setenv MP_EUILIB us
+setenv MP_HOSTFILE /fs/nene/$user/SPnodes.$JID
+poe $restparam
+poe $restparam
+poe $restparam
+poe $restparam
+poe $restparam
+sprelease $JID
+rm -f ~/SPnodes.$JID
+ 

@@ -1,0 +1,38 @@
+#!/usr/imports/bin/tcsh
+
+set part = 4
+set mach = "SP2"
+set k    = 11
+set p    = 2
+set dir  = "/fs/nene/dbader/imageU-3.1"
+setenv JID  `spq | grep $user | grep Running | tail -1|awk '{print $1}'`
+cd $dir
+
+while ($p < $part)
+  @ p = ( $p * 2 )
+  setenv MP_PROCS $p
+  setenv MP_EUILIB us
+  setenv MP_HOSTFILE /fs/nene/dbader/SPnodes.$JID
+
+  poe $dir/connComp -U 999 -o $mach-hrelS.$p.out
+  poe $dir/connComp -U 999 -o $mach-hrelS.$p.out
+  poe $dir/connComp -U 999 -o $mach-hrelS.$p.out
+  poe $dir/connComp -U 999 -o $mach-hrelS.$p.out
+
+  @ k = 11
+  while ($k < 20)
+	@ k = ( $k + 1 )
+	setenv MP_PROCS $p
+	setenv MP_EUILIB us
+	setenv MP_HOSTFILE /fs/nene/dbader/SPnodes.$JID
+	
+	poe $dir/connComp -U $k -o $mach-radixS.$p.out
+	poe $dir/connComp -U $k -o $mach-radixS.$p.out
+	poe $dir/connComp -U $k -o $mach-radixS.$p.out
+	poe $dir/connComp -U $k -o $mach-radixS.$p.out
+  end
+
+end
+
+rm -f ~/SPnodes.$JID
+

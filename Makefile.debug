@@ -1,0 +1,18 @@
+# Use gmake!
+TIC_REGISTRY:=
+TARGET := connComp-debug
+CASTLE := /fs/cm5
+
+# MPL := CMAM | CMMD | SP1 | SP2
+MPL := CMMD
+
+# MACHINE := CM5 | SP1 | SP2
+MACHINE := CM5
+
+CFLAGS := -g -O -D${MACHINE}
+
+include ${CASTLE}/include/split-c/Make.split-c
+
+${BIN}/%.o: %.s
+	cc -E $*.s | egrep -v "^#" | gas -o $@ -
+

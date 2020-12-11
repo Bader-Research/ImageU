@@ -1,0 +1,213 @@
+/*									tab:8
+ *
+ * README - for Experimental Parallel Algorithmics (EXPAR) Project
+ * 
+ * "Copyright (c) 1994-1996 David A. Bader
+ *
+ * Authors: 		David A. Bader
+ *                      Joseph F. Ja'Ja'
+ *                      
+ * Version:		3.8
+ * Creation Date:	October 20, 1994
+ * Filename:		README
+ * History:
+ */
+
+These Practical Parallel Algorithms for Combinatorial, Data
+Communication, and Image Processing have been written in the Split-C
+parallel language from UC Berkeley. This package has been tested on
+the Thinking Machines CM-5, IBM SP-1 and SP-2, Intel Paragon, Meiko
+CS-2, Cray Research T3D, and SGI Challenge machines.
+
+Currently, the Image Processing package performs the histogram of 
+n x n images, the connected components of both binary and multi-gray
+level images, using either 4- or 8-connectivity, delta-connected
+components, image enhancement, and image segmentation. (Note that the
+number of processors must be a power of 2, and that the image side
+length (n) must be a multiple of the number of processors.)
+
+Output images can be in EPS, GIF, PGM, or Vista standard formats. In
+addition, on parallel machines which allow nodes to be X11 clients,
+images can appear in X11 windows.
+
+Source code for Algorithms:
+===========================
+Image Processing:
+- histogramming
+- connected components for binary images
+- connected components for grayscale images
+- blurring image filter
+- symmetric neighborhood filter (image enhancement)
+- cropping filter
+- 1-nearest neighbor filter
+- delta-connected components
+
+Combinatorial Algorithms:
+- median finding
+- selection
+- sorting (radix, column, sample, regular)
+
+Data Communication:
+- transpose
+- broadcast
+- collective communication
+- dynamic data redistribution
+- h-relation all-to-all personal communication
+
+Data sets:
+- NAS IS benchmark
+- images (1-9) from first paper below
+- image  (240) from Krishnamurthy and Culler (2D/40)
+- image  (250) from Krishnamurthy and Culler (2D/50)
+- image  (260) from Krishnamurthy and Culler (2D/60)
+
+**********************************************************************
+
+   This software is available via anonymous ftp to 
+        ftp://ftp.umiacs.umd.edu/pub/EXPAR
+
+
+   Split-C is available through UC Berkeley
+   (http://http.cs.berkeley.edu/projects/parallel/castle/split-c/),
+   sending email to Prof. Culler <culler@cs.berkeley.edu>,
+   or the Split-C mailing list <split-c@boing.cs.berkeley.edu>.
+   In the interim until all platforms of Split-C are available from
+   the above location, installations for the IBM SP-2 and Cray T3D
+   will be available through the UMIACS anonymous ftp site given
+   above.
+
+**********************************************************************
+
+	      EXPERIMENTAL PARALLEL ALGORITHMICS (EXPAR)
+	       http://www.umiacs.umd.edu/research/EXPAR
+
+   Related research reports describing these algorithms, as well as
+   implementation and performance, are as follows:
+
+**********************************************************************
+
+** Parallel Algorithms for Image Histogramming and Connected        **
+**     Components with an Experimental Study                        ** 
+** [by D.A. Bader and J. JaJa]                                      **
+
+** Parallel Algorithms for Image Enhancement and Segmentation by    **
+**     Region Growing with an Experimental Study                    **
+** [by D.A. Bader, J. JaJa, D. Harwood, and L.S. Davis]             **
+
+** Practical Parallel Algorithms for Dynamic Data Redistribution,   **
+**     Median Finding, and Selection                                **
+** [by D.A. Bader and J. JaJa]                                      **
+
+** Practical Parallel Algorithms for Personalized Communication and **
+**    Integer Sorting                                               **
+** [by D.A. Bader, D.R. Helman, and J. JaJa]                        **
+
+** A Parallel Sorting Algorithms With an Experimental Study         **
+**    Integer Sorting                                               **
+** [by D.R. Helman, D.A. Bader, and J. JaJa]                        **
+
+**********************************************************************
+
+There are nine (9) synthetic test images which can be created "on the
+fly", or the DARPA Image Understanding Benchmark image may be used.
+The latter image is a 512 x 512 image of 256 gray levels, and is
+called "IUbench.im" in this release.
+
+Synthetic test images from Copty et al. JPDC 21:160-168, April 1994.
+copty.im3.128   a  128 x  128 gray scale image of discs (Figure 3)
+copty.im6.256   a  256 x  256 binary tool image (Figure 6)
+
+Standard Image Processing Images
+lena.512        a  512 x 512  gray scale image of Lenna
+girl.512        a  512 x 512  gray scale image of a girl playing
+
+Several Landsat TM images are included as well:
+band5.512	a  512 x  512 band 5 view taken of South America
+band5.1024      a 1024 x 1024 band 5 view taken of South America
+band4.512       a  512 x  512 band 4 view taken of New Orleans
+
+**********************************************************************
+
+Installation:
+0. Install Split-C on parallel platform
+1. Type "cp mach-specifics.h-all mach-specifics.h".
+   If your machine isn't listed in this header file,
+      1a. Compile and link with command "gmake"
+      1b. Run "connComp -t" on parallel platform with 1 or more processors.
+2. Compile and link with command "gmake"
+
+X. If you wish to use X11 Windows,             [optional]
+   compile with the "-DX11" setting in CFLAGS,
+   and link with "LIBS := -lX11".
+  
+**********************************************************************
+
+The syntax for running this package is as follows:
+
+argument   definition
+   n       an n x n image
+   k       number of gray levels (2=binary)
+   i       test image number
+   f       input filename of row-major format image with one pixel/byte
+   o       output filename
+   v       print verbose results
+   V       output Vista images (toggle)
+   P       output Encapsulated PostScript images (toggle)
+   F       output GIF images (toggle)
+   M       output Portable Graymap (PGM) images (toggle)
+   X       pop up X11 window images (toggle) [optional]
+
+algorithms 
+   b       binary 8-connected components
+   B       binary 4-connected components
+   g       gray level 8-connected components
+   G       gray level 4-connected components
+   l       delta-connected components (requires argument [delta])
+   h       histogram
+   Z       all benchmark tests
+   s       segment image
+   U       radixsort; argument is log2(n/PROCS)
+   t       test machine specifics. 
+
+For example: 
+
+To run the 4-connected components algorithm on binary test image 3, 
+and choosing a 512x512 image: 
+> connComp -n 512 -k 2 -i 3 -B
+
+To run the histogram of binary test image 7,
+and choosing a 128x128 image: 
+> connComp -n 128 -k 2 -i 7 -h
+
+To run the histogram and 4-connected components of the DARPA
+Image Understanding test image:
+> connComp -n 512 -k 256 -f im/IUbench.im -h -G 
+
+To run the entire connected components benchmark tests:
+> connComp -Z
+
+To send the output to file "output.txt":
+> connComp -Z -o output.txt
+
+To run the image segmentation algorithm on Copty Im 3:
+> connComp -n  128 -k 256 -f im/copty.im3.128 -s 
+
+To run the image segmentation algorithm on Copty Im 6:
+> connComp -n  256 -k   2 -f im/copty.im6.256 -s 
+
+To run the image enhancement and segmentation algorithms:
+> connComp -n  512 -k 256 -f im/band5.512    -s
+> connComp -n 1024 -k 256 -f im/band5.1024   -s
+
+To run the image enhancement and segmentation algorithms with verbose output:
+> connComp -n  512 -k 256 -f im/band5.512  -s -v 
+> connComp -n 1024 -k 256 -f im/band5.1024 -s -v
+
+To run the image segmentation algorithms,  writing EPS output images:
+> connComp -n  512 -k 256 -f im/band5.512  -s -v -P 
+> connComp -n 1024 -k 256 -f im/band5.1024 -s -v -P
+
+To run the radix sort algorithms,  with 256K integers per processor:
+> connComp -U 18
+
+**********************************************************************

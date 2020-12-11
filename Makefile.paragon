@@ -1,0 +1,16 @@
+# Use gmake!
+TIC_REGISTRY:=
+TARGET := connComp
+DIR_LIBSPLITC := /disks/barad-dur/tic/split-c/libsplit-c/133-ltl
+DIR_SPLITCC := /disks/barad-dur/tic/split-c/split-cc/130-par
+MPL := PAM
+
+CFLAGS := -O4
+
+include ${DIR_LIBSPLITC}/Make.split-c
+
+# run with connComp -plk 1000000
+# or with -sz #node
+
+# setenv MPL PAM
+# setenv NX_DFLT_PART open

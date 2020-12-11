@@ -1,0 +1,11 @@
+# Use gmake!
+TIC_REGISTRY:=
+TARGET := connComp
+
+MPL := MPI
+CFLAGS   := -O2
+CASTLE	 := /home/atef/joseph/split-c
+MPI_ROOT := /home/atef/joseph/mpich
+
+include ${CASTLE}/include/split-c/Make.split-c
+

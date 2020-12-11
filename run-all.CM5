@@ -1,0 +1,11 @@
+#!/bin/csh
+
+set p    = 32
+set mach = "CM5"
+
+mkdir output
+repeat 5 connComp -n  512 -k 256 -f im/IUbench.im -o output/IUbench.$p.$mach.out -G -V
+repeat 5 connComp -n  128 -k 256 -f im/copty.im3.128 -o output/copty.im3.$p.$mach.out -s -V
+repeat 5 connComp -n  256 -k   2 -f im/copty.im6.256 -o output/copty.im6.$p.$mach.out -s -V
+repeat 5 connComp -n  512 -k 256 -f im/band5.512 -o output/band5.$p.$mach.out -s -V
+repeat 5 connComp -n 1024 -k 256 -f im/b5.1024 -o output/b5.$p.$mach.out -s -V

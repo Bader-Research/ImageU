@@ -1,0 +1,16 @@
+#!/bin/csh
+
+set p    = 32
+set mach = "CM5"
+set k    = 11
+
+while ($k < 20)
+@ k = $k + 1
+
+connComp -U $k -o $mach-radix.$p.out
+connComp -U $k -o $mach-radix.$p.out
+connComp -U $k -o $mach-radix.$p.out
+connComp -U $k -o $mach-radix.$p.out
+
+end
+

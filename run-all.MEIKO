@@ -1,0 +1,12 @@
+#!/bin/csh
+
+set p    = $1
+set mach = "CS2"
+set dir  = "/export/tmphome/dbader/iu2.3"
+cd $dir
+mkdir output
+repeat 5 prun -n $p -b 0 $dir/connComp -n  512 -k 256 -f $dir/im/IUbench.im -o $dir/output/IUbench.$p.$mach.out -G -V
+repeat 5 prun -n $p -b 0 $dir/connComp -n  128 -k 256 -f $dir/im/copty.im3.128 -o $dir/output/copty.im3.$p.$mach.out -s -V
+repeat 5 prun -n $p -b 0 $dir/connComp -n  256 -k   2 -f $dir/im/copty.im6.256 -o $dir/output/copty.im6.$p.$mach.out -s -V
+repeat 5 prun -n $p -b 0 $dir/connComp -n  512 -k 256 -f $dir/im/band5.512 -o $dir/output/band5.$p.$mach.out -s -V
+repeat 5 prun -n $p -b 0 $dir/connComp -n 1024 -k 256 -f $dir/im/b5.1024 -o $dir/output/b5.$p.$mach.out -s -V

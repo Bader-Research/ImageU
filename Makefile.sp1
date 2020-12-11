@@ -1,0 +1,15 @@
+# Use gmake!
+
+TARGET := connComp
+CASTLE :=
+
+# MPL := CMAM | CMMD | SP1 | SP2
+MPL := SP1
+
+# MACHINE := CM5 | SP1 | SP2
+MACHINE := SP1
+
+CFLAGS := -O4 -D${MACHINE} 
+
+include ${CASTLE}/include/split-c/Make.split-c
+

@@ -1,0 +1,18 @@
+# Use gmake!
+TIC_REGISTRY:=
+TARGET := ${HOME}/Mtmp/iu2.2/connComp
+CASTLE := /fs/meiko-user/shared/split-c
+
+# MPL := CMAM | CMMD | SP1 | SP2
+MPL := MEIKO
+GCC := gcc
+
+# MACHINE := CM5 | SP1 | SP2
+MACHINE := MEIKO
+
+CFLAGS := -O4 -D${MACHINE}
+
+include ${CASTLE}/include/split-c/Make.split-c
+
+
+
